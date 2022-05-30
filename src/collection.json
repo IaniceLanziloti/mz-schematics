@@ -1,0 +1,15 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "application": {
+      "description": "Create an application",
+      "factory": "./application/index#application",
+      "schema": "./application/schema.json"
+    },
+    "domain": {
+      "description": "Create a domain.",
+      "factory": "./domain/index#domain",
+      "schema": "./domain/schema.json"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsMZApplication",
+  "title": "MZ Group Application Options Schema",
+  "type": "object",
+  "description": "Create nodejs application",
+  "properties": {
+    "name":{
+      "type":"string",
+      "description": "The name of the application.",
+      "$default":{
+        "$source":"argv",
+        "index":0
+      },
+      "x-prompt":"What name would you like to use for the application?"
+    },
+    "author": {
+      "type":"string",
+      "description": "The application author.",
+      "default":""
+    },
+    "description": {
+      "type":"string",
+      "description": "The application description.",
+      "default":""
+    }
+  }
+}

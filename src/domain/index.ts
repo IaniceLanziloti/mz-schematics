@@ -1,4 +1,5 @@
 import {  strings  } from '@angular-devkit/core';
+import { toUpperCase } from '../utils/utils';
 import { 
   branchAndMerge,
   template,
@@ -49,7 +50,8 @@ export function createFiles(_options: MzApplicationDomainOptions): Rule {
     const sourceParametrizedTemplates = apply(sourceTemplates,[
       template({
         ..._options,
-        ...strings
+        ...strings,
+        toUpperCase
       }),
     ])
 

@@ -13,15 +13,6 @@
         "index":0
       },
       "x-prompt":"What name would you like to use for the domain?"
-    },
-    "application":{
-      "type":"string",
-      "description": "The name of the application",
-      "$default":{
-        "$source":"argv",
-        "index":1
-      },
-      "x-prompt":"What name of application container?"
     }
   }
 }

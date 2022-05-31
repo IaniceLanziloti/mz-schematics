@@ -24,11 +24,11 @@ class <%= classify(name) %>Router implements IRouter {
     const notImplemented = this.notImplementedMiddleware.handle;
 
     server.get(
-      '/api/<%= domain %>/<%= name %>/', 
+      '/api/<%= domain %>/<%= name %>/',
       this.<%= camelize(name) %>Controller.index || notImplemented
     );
     server.post(
-      '/api/<%= domain %>/<%= name %>/', 
+      '/api/<%= domain %>/<%= name %>/',
       this.<%= camelize(name) %>Controller.create || notImplemented
     );
     server.get(

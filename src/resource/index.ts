@@ -7,6 +7,7 @@ import { ApplicationConfigReader } from '../utils/readers';
 import { RouterIdentifierModifier } from '../utils/modifiers/router-identifier';
 import { ControllerIdentifierModifier } from '../utils/modifiers/controller-identifier';
 import { DomainControllersDtosModifier } from '../utils/modifiers/domain-controllers-dtos.modifier';
+import { DomainControllersModifier } from '../utils/modifiers/domain-controllers.modifier';
 
 function preLaunch(_options: MzApplicationResourceOptions) {
   const compiledOptions: MzApplicationResourceOptions = Object.assign({}, _options);
@@ -21,8 +22,9 @@ function changeFiles(_options:MzApplicationResourceOptions) {
 
     RouterIdentifierModifier.addResource(tree, rootDir, domain, resource);
     ControllerIdentifierModifier.addResource(tree, rootDir, domain, resource);
-    
+
     DomainControllersDtosModifier.addResource(tree, rootDir, domain, resource);
+    DomainControllersModifier.addResource(tree, rootDir, domain, resource);
   }
 }
 

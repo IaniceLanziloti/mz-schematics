@@ -6,20 +6,23 @@ import { MzApplicationResourceOptions } from './schema';
 import { ApplicationConfigReader } from '../utils/readers';
 import { RouterIdentifierModifier } from '../utils/modifiers/router-identifier';
 import { ControllerIdentifierModifier } from '../utils/modifiers/controller-identifier';
+import { DomainControllersDtosModifier } from '../utils/modifiers/domain-controllers-dtos.modifier';
 
 function preLaunch(_options: MzApplicationResourceOptions) {
   const compiledOptions: MzApplicationResourceOptions = Object.assign({}, _options);
   return compiledOptions
 }
 
-function addResourceToIdentifiers(_options:MzApplicationResourceOptions) {
+function changeFiles(_options:MzApplicationResourceOptions) {
   return (tree:Tree) => {
     const configurationFile = new ApplicationConfigReader(tree).read();
     const rootDir = configurationFile['rootDir'];
-    const { domain, name: resource } = _options
+    const { domain, name: resource } = _options;
 
-    RouterIdentifierModifier.addResource(tree, rootDir, domain, resource)
-    ControllerIdentifierModifier.addResource(tree, rootDir, domain, resource)
+    RouterIdentifierModifier.addResource(tree, rootDir, domain, resource);
+    ControllerIdentifierModifier.addResource(tree, rootDir, domain, resource);
+    
+    DomainControllersDtosModifier.addResource(tree, rootDir, domain, resource);
   }
 }
 
@@ -46,7 +49,7 @@ export function resource(_options: any): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     return branchAndMerge(chain([
       createFiles(options),
-      addResourceToIdentifiers(options)
+      changeFiles(options)
     ]))(tree, _context)
   };
 }

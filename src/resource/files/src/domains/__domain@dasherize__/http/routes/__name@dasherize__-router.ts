@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
-import { APPLICATION_ROUTES } from 'shared/container/identifiers'
-import { NotImplementedMiddleware } from 'shared/http/middlewares'
+import { APPLICATION_ROUTES } from 'shared/container/identifiers';
+import { NotImplementedMiddleware } from 'shared/http/middlewares';
 import { IRouter, IServer, IController } from 'shared/http/server/interfaces';
 
 import { <%= toUpperCase(domain) %>_CONTROLLERS } from '../../identifiers';
@@ -25,14 +25,14 @@ class <%= classify(name) %>Router implements IRouter {
 
     server.get(
       '/api/<%= domain %>/<%= name %>/', 
-      this.<%= camelize(name) %>Controller.index || notImplemented 
+      this.<%= camelize(name) %>Controller.index || notImplemented
     );
     server.post(
       '/api/<%= domain %>/<%= name %>/', 
-      this.<%= camelize(name) %>Controller.create || notImplemented 
+      this.<%= camelize(name) %>Controller.create || notImplemented
     );
     server.get(
-      '/api/<%= domain %>/<%= name %>/:<%= camelize(name) %>', 
+      '/api/<%= domain %>/<%= name %>/:<%= camelize(name) %>',
       this.<%= camelize(name) %>Controller.show || notImplemented
     );
     server.put(

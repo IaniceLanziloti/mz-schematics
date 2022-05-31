@@ -1,5 +1,5 @@
 import {  strings  } from '@angular-devkit/core';
-import { toUpperCase } from '../utils/utils';
+import { toUpperCase } from '../utils/functions/utils';
 import { 
   branchAndMerge,
   template,
@@ -11,10 +11,10 @@ import {
   mergeWith,
   chain 
 } from '@angular-devkit/schematics';
-import { ControllerIdentifierModifier } from '../modifiers/controller-identifier';
-import { RouterIdentifierModifier } from '../modifiers/router-identifier';
-import { ApplicationConfigFinder } from '../utils/application-config.finder';
+import { ControllerIdentifierModifier } from '../utils/modifiers/controller-identifier';
+import { RouterIdentifierModifier } from '../utils/modifiers/router-identifier';
 import { MzApplicationDomainOptions } from './schema';
+import { ApplicationConfigReader } from '../utils/readers';
 
 function preLaunch( _options:MzApplicationDomainOptions): MzApplicationDomainOptions {
   const compiledOptions:MzApplicationDomainOptions = Object.assign({}, _options);
@@ -27,14 +27,8 @@ function preLaunch( _options:MzApplicationDomainOptions): MzApplicationDomainOpt
 function addDomainToIdentifiers (_options: MzApplicationDomainOptions): Rule {
   return (tree:Tree) => {
     const currentLocation = _options.path || '';
-    const configurationFilePath = new ApplicationConfigFinder(tree).find(currentLocation);
-
-    if (!configurationFilePath) {
-      throw new Error(`Could not find configuration file.`);
-    }
-
-    const configurationFile = JSON.parse(tree.read(configurationFilePath)?.toString()|| `{"rootDir":"src"}`);
-    const rootDir = configurationFile['rootDir'] ;
+    const configurationFile = new ApplicationConfigReader(tree).read(currentLocation);
+    const rootDir = configurationFile['rootDir'];
 
     RouterIdentifierModifier.addDomain(tree, rootDir, _options.name);
     ControllerIdentifierModifier.addDomain(tree, rootDir, _options.name);
@@ -42,10 +36,10 @@ function addDomainToIdentifiers (_options: MzApplicationDomainOptions): Rule {
     return tree
   }
 }
-export function createFiles(_options: MzApplicationDomainOptions): Rule {
+function createFiles(_options: MzApplicationDomainOptions): Rule {
   return (tree: Tree, _context: SchematicContext) => {
 
-    const sourceTemplates = url('./files')
+    const sourceTemplates = url('./files');
 
     const sourceParametrizedTemplates = apply(sourceTemplates,[
       template({

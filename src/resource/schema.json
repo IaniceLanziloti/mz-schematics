@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsMZDomain",
+  "title": "MZ Group Resouce Options Schema",
+  "type": "object",
+  "description": "Create an application resource for MZ Group applications",
+  "properties": {
+    "name":{
+      "type":"string",
+      "description": "The name of resource.",
+      "$default":{
+        "$source":"argv",
+        "index":0
+      },
+      "x-prompt":"What name would you like to use for the resource?"
+    },
+    "domain":{
+      "type":"string",
+      "description": "The domain container.",
+      "$default":{
+        "$source":"argv",
+        "index":1
+      },
+      "x-prompt":"What name of domain container?"
+    }
+  }
+
+}

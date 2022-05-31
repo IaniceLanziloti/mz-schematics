@@ -3,7 +3,7 @@
   "$id": "SchematicsMZDomain",
   "title": "MZ Group Domain Options Schema",
   "type": "object",
-  "description": "Create an application domain for MZGroup application",
+  "description": "Create an application domain for MZ Group applications",
   "properties": {
     "name":{
       "type":"string",

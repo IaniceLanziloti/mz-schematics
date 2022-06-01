@@ -11,8 +11,7 @@ import {
   mergeWith,
   chain 
 } from '@angular-devkit/schematics';
-import { ControllerIdentifierModifier } from '../utils/modifiers/controller-identifier';
-import { RouterIdentifierModifier } from '../utils/modifiers/router-identifier';
+import { ControllerIdentifierModifier, RouterIdentifierModifier } from '../utils/modifiers';
 import { MzApplicationDomainOptions } from './schema';
 import { ApplicationConfigReader } from '../utils/readers';
 

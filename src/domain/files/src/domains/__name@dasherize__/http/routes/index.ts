@@ -3,7 +3,7 @@ import { IRouter, IServer } from 'shared/http/server/interfaces';
 
 @injectable()
 class <%= classify(name) %>Router implements IRouter {
-  contructor() {
+  constructor() {
     /*
       This is a blank a constructor.
       The app uses this to inject the domain routes

@@ -4,10 +4,13 @@ import { toUpperCase } from '../utils/functions/utils';
 import { apply, branchAndMerge, chain, mergeWith, Rule, SchematicContext, template, Tree, url } from '@angular-devkit/schematics';
 import { MzApplicationResourceOptions } from './schema';
 import { ApplicationConfigReader } from '../utils/readers';
-import { RouterIdentifierModifier } from '../utils/modifiers/router-identifier';
-import { ControllerIdentifierModifier } from '../utils/modifiers/controller-identifier';
-import { DomainControllersDtosModifier } from '../utils/modifiers/domain-controllers-dtos.modifier';
-import { DomainControllersModifier } from '../utils/modifiers/domain-controllers.modifier';
+import { 
+  RouterIdentifierModifier,
+  ControllerIdentifierModifier,
+  DomainControllersDtosModifier,
+  DomainControllersModifier,
+  DomainRoutesModifier 
+} from '../utils/modifiers';
 
 function preLaunch(_options: MzApplicationResourceOptions) {
   const compiledOptions: MzApplicationResourceOptions = Object.assign({}, _options);
@@ -25,6 +28,7 @@ function changeFiles(_options:MzApplicationResourceOptions) {
 
     DomainControllersDtosModifier.addResource(tree, rootDir, domain, resource);
     DomainControllersModifier.addResource(tree, rootDir, domain, resource);
+    DomainRoutesModifier.addResource(tree, rootDir, domain, resource);
   }
 }
 

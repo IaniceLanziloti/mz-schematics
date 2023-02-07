@@ -35,6 +35,7 @@ function addDomainToIdentifiers (_options: MzApplicationDomainOptions): Rule {
     return tree
   }
 }
+
 function createFiles(_options: MzApplicationDomainOptions): Rule {
   return (tree: Tree, _context: SchematicContext) => {
 

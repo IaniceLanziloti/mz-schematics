@@ -21,27 +21,19 @@ class <%= classify(name) %>Router implements IRouter {
   }
 
   public async register(server: IServer) {
-    const notImplemented = this.notImplementedMiddleware.handle;
-
-    server.get(
-      '/api/<%= domain %>/<%= name %>/',
-      this.<%= camelize(name) %>Controller.index || notImplemented
-    );
-    server.post(
-      '/api/<%= domain %>/<%= name %>/',
-      this.<%= camelize(name) %>Controller.create || notImplemented
-    );
+    server.get('/api/<%= domain %>/<%= name %>/', this.<%= camelize(name) %>Controller.index);
+    server.post('/api/<%= domain %>/<%= name %>/', this.<%= camelize(name) %>Controller.create);
     server.get(
       '/api/<%= domain %>/<%= name %>/:<%= camelize(name) %>',
-      this.<%= camelize(name) %>Controller.show || notImplemented
+      this.<%= camelize(name) %>Controller.show
     );
     server.put(
       '/api/<%= domain %>/<%= name %>/:<%= camelize(name) %>',
-      this.<%= camelize(name) %>Controller.update || notImplemented
+      this.<%= camelize(name) %>Controller.update
     );
     server.delete(
       '/api/<%= domain %>/<%= name %>/:<%= camelize(name) %>',
-      this.<%= camelize(name) %>Controller.delete || notImplemented
+      this.<%= camelize(name) %>Controller.delete
     );
   }
 }
